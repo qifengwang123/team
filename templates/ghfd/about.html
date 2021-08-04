@@ -1,0 +1,15 @@
+{% extends 'ghfd/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    About us
+{% endblock %}
+
+{% block body_block %}
+<h1>About Us</h1>
+<div>
+    <li><a href="{% url 'ghfd:introduction' %}">Introduction</a></li>
+    <li><a href="{% url 'ghfd:how_to_use' %}">How To Use</a></li>
+    <li><a href="{% url 'ghfd:out_team' %}">Our Team</a></li>
+</div>
+{% endblock %}
