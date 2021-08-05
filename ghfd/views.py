@@ -8,14 +8,11 @@
  #   return HttpResponse("Rango says here is the about page. <a href='/ghfd/'>Index</a>")
 
 from django.shortcuts import render
-from django.http import HttpResponse
-from ghfd.models import Category
-from ghfd.models import Page
+from ghfd.models import Category, Page, UserProfile, Role, Cart, Order, Food, Review, Restaurant, Rating
 from ghfd.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from ghfd.forms import PageForm
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from ghfd.forms import UserForm, UserProfileForm
 from datetime import datetime
@@ -34,6 +31,61 @@ def about(request):
 def cart(request):
     visitor_cookie_handler(request)
     return render(request, 'ghfd/cart.html')
+
+def restaurants(request):
+    restaurant_list = Restaurant.objects.order_by('-views')
+
+    context_dict = {}
+    context_dict['restaurants'] = restaurant_list
+
+    visitor_cookie_handler(request)
+    return render(request, 'ghfd/restaurants.html', context=context_dict)
+
+def show_restaurant(request, restaurant_name_slug):
+    context_dict = {}
+
+    try:
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+
+        context_dict['restaurant'] = restaurant
+    except Restaurant.DoesNotExist:
+        context_dict['restaurant'] = None
+
+    return render(request, 'ghfd/restaurant.html', context=context_dict)
+
+def menu(request, restaurant_name_slug):
+    context_dict = {}
+
+    try:
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+        food_list = Food.objects.filter(restaurant_id=restaurant.id)
+
+        context_dict['foods'] = food_list
+        context_dict['restaurant'] = restaurant
+    except Food.DoesNotExist:
+        context_dict['foods'] = None
+        context_dict['restaurant'] = None
+
+    return render(request, 'ghfd/menu.html', context=context_dict)
+
+def show_food(request, restaurant_name_slug, food_name_slug):
+    context_dict = {}
+
+    try:
+        food = Food.objects.get(slug=food_name_slug)
+        review_list = Review.objects.filter(food_id=food.id)
+        restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+
+        context_dict['food'] = food
+        context_dict['reviews'] = review_list
+        context_dict['restaurant'] = restaurant
+    except Restaurant.DoesNotExist:
+        context_dict['foods'] = None
+        context_dict['reviews'] = None
+        context_dict['restaurant'] = None
+
+    return render(request, 'ghfd/food.html', context=context_dict)
+
 
 def show_category(request, category_name_slug):
     context_dict = {}

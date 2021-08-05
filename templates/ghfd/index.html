@@ -9,8 +9,8 @@
 <h1>Welcome to Green Hands food delivery!</h1>
 
 <div>
+    <li><a href="{% url 'ghfd:restaurants' %}">Order Now</a></li>
     <li><a href="{% url 'ghfd:about' %}">About</a></li>
-    <li><a href="{% url 'ghfd:index' %}">Order Now</a></li>
 
     {% if user.is_authenticated %}
         <li><a href="{% url 'ghfd:cart' %}">Cart</a></li>

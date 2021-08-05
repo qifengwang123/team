@@ -24,7 +24,7 @@ SECRET_KEY = 'sq_z*m=yr)aiu$9lyzf@)&-!o(yjs=)9igwhuco$d7@a3jed=@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.50.2']
 
 REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True

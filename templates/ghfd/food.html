@@ -1,0 +1,34 @@
+{% extends 'ghfd/base.html' %}
+
+{% block title_block %}
+    {{ food.name }}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ restaurant.name }} - {{ food.name }}</h1>
+    <div>
+        Description: {{ food.description }}<br />
+        Price: {{ food.price }}<br />
+    </div>
+
+    <div>
+        <h2>Reviews</h2>
+        {% if reviews %}
+            <ul>
+            {% for review in reviews %}
+                <li>
+                    Review: {{ review.content }}<br />
+                    Date: {{ review.date }}<br />
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no reviews present.</strong>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{% url 'ghfd:menu' restaurant.slug %}">Back</a>
+    </div>
+
+{% endblock %}

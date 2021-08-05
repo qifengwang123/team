@@ -1,0 +1,22 @@
+{% extends 'ghfd/base.html' %}
+
+{% block title_block %}
+    {{ restaurant.name }}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ restaurant.name }}</h1>
+    <div>
+        <h2>Details</h2>
+        Description: {{ restaurant.description }}<br />
+        Address: {{ restaurant.address }}<br />
+        Phone: {{ restaurant.phone }}<br />
+        Rating: {{ restaurant.average_rating }}<br />
+        Views: {{ restaurant.views }}<br />
+    </div>
+
+    <div>
+        <a href="{% url 'ghfd:menu' restaurant.slug %}">Menu</a><br />
+        <a href="{% url 'ghfd:restaurants' %}">Back</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'ghfd/base.html' %}
+
+{% block title_block %}
+    menu
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ restaurant.name }} - Menu</h1>
+    <div>
+        {% if foods %}
+            <ul>
+            {% for food in foods %}
+                <li>
+                    <a href="{% url 'ghfd:show_food' restaurant.slug food.slug %}">
+                        <h2>{{ food.name }}</h2>
+                    </a>
+                    Price: {{ food.price }}<br />
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no foods present.</strong>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'ghfd:show_restaurant' restaurant.slug %}">Back</a>
+    </div>
+
+{% endblock %}
