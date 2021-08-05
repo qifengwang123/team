@@ -31,6 +31,10 @@ def about(request):
     visitor_cookie_handler(request)
     return render(request, 'ghfd/about.html', context=context_dict)
 
+def cart(request):
+    visitor_cookie_handler(request)
+    return render(request, 'ghfd/cart.html')
+
 def show_category(request, category_name_slug):
     context_dict = {}
 

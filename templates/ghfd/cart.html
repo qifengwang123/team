@@ -1,0 +1,52 @@
+{% extends 'ghfd/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    cart
+{% endblock %}
+
+{% block body_block %}
+<h1>cart page</h1>
+
+<body>
+
+    <font color="red"><b>All the food</b></font>
+    <table border="2" cellpadding="0" cellspacing="0">
+        <tr>
+            <th><input type="checkbox" name="check" value="">全选</th>
+            <th>picture</th>
+            <th>id</th>
+            <th>name</th>
+            <th>number</th>
+            <th>subtal price</th>
+            <th>operation</th>
+        </tr>
+    
+        <!-- {volist name="data" id="v"} -->
+        <tr>
+            <td><input type="checkbox" name="check" class="check" value="{$v.sid}"></td>
+            <td><img src="" alt="food picture" width="100" height="100"></td>
+            <td>
+                <span>id：</span><br>
+               
+            </td>
+            <td>food</td>
+            
+            <td>
+                <input type="button" value="-" class="jian">
+                <span class="num">1</span>
+                <input type="button" value="+" class="jia">
+            </td>
+            <td><span class="unit">10</span>pound</td>
+            <td>
+                <a href="#">delete</a>
+            </td>
+        </tr>
+        <!-- {/volist} -->
+    </table>
+    
+    </script>
+    </body>
+    
+
+{% endblock %}
