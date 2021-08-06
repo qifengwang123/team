@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ghfd',
     'registration',
+    'cart',
 ]
 
 MIDDLEWARE = [

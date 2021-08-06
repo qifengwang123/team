@@ -8,7 +8,8 @@
  #   return HttpResponse("Rango says here is the about page. <a href='/ghfd/'>Index</a>")
 
 from django.shortcuts import render
-from ghfd.models import Category, Page, UserProfile, Role, Cart, Order, Food, Review, Restaurant, Rating
+from cart.cart import Cart
+from ghfd.models import Category, Page, UserProfile, Role, Order, Food, Review, Restaurant, Rating
 from ghfd.forms import CategoryForm
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -27,10 +28,6 @@ def about(request):
     
     visitor_cookie_handler(request)
     return render(request, 'ghfd/about.html', context=context_dict)
-
-def cart(request):
-    visitor_cookie_handler(request)
-    return render(request, 'ghfd/cart.html')
 
 def my_account(request):
     visitor_cookie_handler(request)
@@ -106,6 +103,23 @@ def show_category(request, category_name_slug):
 
     return render(request, 'ghfd/category.html', context=context_dict)
 
+def add_to_cart(request, food_id):
+    product = Food.objects.get(id=food_id)
+    restaurant = product.restaurant_id
+    cart = Cart(request)
+    quantity = 1
+    cart.add(product, product.price, quantity)
+    return redirect(reverse('ghfd:menu', kwargs={'restaurant_name_slug': restaurant.slug}))
+
+def remove_from_cart(request, food_id):
+    product = Food.objects.get(id=food_id)
+    cart = Cart(request)
+    cart.remove(product)
+    return redirect(reverse('ghfd:cart'))
+
+def get_cart(request):
+    return render(request, 'ghfd/cart.html', {'cart': Cart(request)})
+
 @login_required
 def add_category(request):
     form = CategoryForm()
@@ -177,13 +191,6 @@ def register(request):
         profile_form = UserProfileForm()
 
     return render(request, 'ghfd/register.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-
-
-
-@login_required
-def restricted(request):
-    return render(request, 'ghfd/restricted.html')
-
 
 def get_server_side_cookie(request, cookie, default_val=None):
     val = request.session.get(cookie)

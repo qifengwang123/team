@@ -15,6 +15,7 @@
                         <h2>{{ food.name }}</h2>
                     </a>
                     Price: {{ food.price }}<br />
+                    <a href="{% url "ghfd:add_to_cart" food.id %}">Add to my cart</a>
                 </li>
             {% endfor %}
             </ul>

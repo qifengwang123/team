@@ -1,5 +1,6 @@
 from django.contrib import admin
-from ghfd.models import Category, Page, UserProfile, Role, Cart, Order, Food, Review, Restaurant, Rating
+from ghfd.models import Category, Page, UserProfile, Role, Order, Food, Review, Restaurant, Rating
+from cart.models import Item
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url')
@@ -16,10 +17,10 @@ class FoodAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin) 
 admin.site.register(UserProfile)
-admin.site.register(Cart)
 admin.site.register(Role)
 admin.site.register(Order)
 admin.site.register(Review)
 admin.site.register(Restaurant, RestaurantAdmin)
 admin.site.register(Food, FoodAdmin)
 admin.site.register(Rating)
+admin.site.register(Item)

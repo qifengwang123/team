@@ -13,35 +13,45 @@
     <font color="red"><b>All the food</b></font>
     <table border="2" cellpadding="0" cellspacing="0">
         <tr>
-            <th><input type="checkbox" name="check" value="">全选</th>
-            <th>picture</th>
-            <th>id</th>
-            <th>name</th>
-            <th>number</th>
-            <th> price</th>
-            <th>operation</th>
+            <th>Food</th>
+            <th>Restaurant</th>
+            <th>Unit price</th>
+            <th>Quantity</th>
+            <th>Total price</th>
+            <th>Operation</th>
         </tr>
-    
-        <!-- {volist name="data" id="v"} -->
+
+        {% for item in cart %}
         <tr>
-            <td><input type="checkbox" name="check" class="check" value="{$v.sid}"></td>
-            <td><img src="" alt="food picture" width="100" height="100"></td>
-            <td>
-                <span>id：</span><br>
-               
-            </td>
-            <td>food</td>
-            
-            <td>
-                <input type="button" value="-" class="jian">
-                <span class="num">1</span>
-                <input type="button" value="+" class="jia">
-            </td>
-            <td><span class="unit">10</span>pound</td>
-            <td>
-                <a href="#">delete</a>
-            </td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.restaurant_id }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.total_price }}</td>
+            <td><a href="{% url "ghfd:remove_from_cart" item.product.id %}">Delete</a></td>
         </tr>
+        {% endfor %}
+
+        <!-- {volist name="data" id="v"} -->
+{#        <tr>#}
+{#            <td><input type="checkbox" name="check" class="check" value="{$v.sid}"></td>#}
+{#            <td><img src="" alt="food picture" width="100" height="100"></td>#}
+{#            <td>#}
+{#                <span>id：</span><br>#}
+{#               #}
+{#            </td>#}
+{#            <td>food</td>#}
+{#            #}
+{#            <td>#}
+{#                <input type="button" value="-" class="jian">#}
+{#                <span class="num">1</span>#}
+{#                <input type="button" value="+" class="jia">#}
+{#            </td>#}
+{#            <td><span class="unit">10</span>pound</td>#}
+{#            <td>#}
+{#                <a href="#">delete</a>#}
+{#            </td>#}
+{#        </tr>#}
         <!-- {/volist} -->
     </table>
     

@@ -75,11 +75,10 @@ class Restaurant(models.Model):
         return self.name
 
 class Food(models.Model):
-    ID_MAX_LENGTH = 32
     NAME_MAX_LENGTH = 64
     DESCRIPTION_MAX_LENGTH = 256
 
-    id = models.CharField(max_length=ID_MAX_LENGTH, unique=True, primary_key=True)
+    id = models.IntegerField(unique=True, primary_key=True)
     name = models.CharField(max_length=NAME_MAX_LENGTH)
     price = models.IntegerField()
     description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH)
@@ -92,15 +91,6 @@ class Food(models.Model):
 
     def __str__(self):
         return self.name
-
-class Cart(models.Model):
-    ID_MAX_LENGTH = 32
-
-    food_id = models.ManyToManyField(Food)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Cart: " + self.user_id
 
 class Order(models.Model):
     ID_MAX_LENGTH = 32
