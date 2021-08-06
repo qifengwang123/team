@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block body_block %}
-    <h1>{{ restaurant.name }}</h1>
+   
+    <div class="jumbotron p-4">
+        <div class="container">
+            <h1 class="jumbotron-heading">{{ restaurant.name }}</h1>
+        </div>
+    </div>
     <div>
         <h2>Details</h2>
         Description: {{ restaurant.description }}<br />
