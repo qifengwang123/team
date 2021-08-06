@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Welcome to Green Hands food delivery!</h1>
+<!-- <h1>Welcome to Green Hands food delivery!</h1>
 
 <div>
     <li><a href="{% url 'ghfd:restaurants' %}">Order Now</a></li>
@@ -14,11 +14,29 @@
 
     {% if user.is_authenticated %}
         <li><a href="{% url 'ghfd:cart' %}">Cart</a></li>
-        <li><a href="{% url 'ghfd:index' %}">My Account</a></li>
+        <li><a href="{% url 'ghfd:my_account' %}">My Account</a></li>
     {% else %}
-    <!--   <li><a href="{% url 'ghfd:register' %}">Sign Up</a></li> -->
+      <li><a href="{% url 'ghfd:register' %}">Sign Up</a></li>
     {% endif %}
-</div>
+</div> -->
+
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">Welcome to Green Hands food delivery!</h1>
+        <div>
+            <h2 class="h2">
+                <li><a href="{% url 'ghfd:restaurants' %}">Order Now</a></li>
+                <li><a href="{% url 'ghfd:about' %}">About</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'ghfd:cart' %}">Cart</a></li>
+                <li><a href="{% url 'ghfd:my_account' %}">My Account</a></li>
+            {% else %}
+                hey there partner!
+            {% endif %}
+            </h2>
+            <strong>{{ boldmessage }}</strong>
+        </div>
+    </div>
 
 {% endblock %}
 

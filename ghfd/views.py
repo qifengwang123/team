@@ -32,6 +32,10 @@ def cart(request):
     visitor_cookie_handler(request)
     return render(request, 'ghfd/cart.html')
 
+def my_account(request):
+    visitor_cookie_handler(request)
+    return render(request, 'ghfd/my_account.html')
+
 def restaurants(request):
     restaurant_list = Restaurant.objects.order_by('-views')
 

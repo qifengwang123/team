@@ -19,5 +19,6 @@ urlpatterns = [
     path('<slug:restaurant_name_slug>/', views.show_restaurant, name='show_restaurant'),
     path('<slug:restaurant_name_slug>/menu/', views.menu, name='menu'),
     path('<slug:restaurant_name_slug>/menu/<slug:food_name_slug>', views.show_food, name='show_food'),
+    path('my_account/', views.my_account, name='my_account'),
 
 ]
